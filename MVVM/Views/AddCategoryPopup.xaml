@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="NavascaBasTaskerApp.Views.AddCategoryPopup">
+    
+    <Border Padding="20" BackgroundColor="White" StrokeShape="RoundRectangle 15" WidthRequest="300">
+        <VerticalStackLayout Spacing="15">
+            <Label Text="Select or Add" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <CollectionView ItemsSource="{Binding FromMeasures}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Text="{Binding .}" BackgroundColor="Transparent" TextColor="Black" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="+ Add New Category" 
+                    BackgroundColor="#515CFF"
+                    x:Name="addNewCategory"/>
+        </VerticalStackLayout>
+    </Border>
+
+
+</toolkit:Popup>
