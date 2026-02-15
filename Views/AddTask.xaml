@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NavascaBasTaskerApp.Views.AddTask"
+             Title="AddTask"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout>
+        <Label Text="Add New Task"
+               FontFamily="OutfitBold"
+               FontSize="32"
+               FontAttributes="Bold"
+               Margin="30,45,0,0"
+               TextColor="#5E66FF"/>
+
+        <Label Text="Select a Category"
+               FontFamily="OutfitSemibold"
+               FontSize="18"
+               Margin="30,15,0,0"
+               TextColor="Black"/>
+
+        <Border Stroke="#7B81FF"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 10"
+                HorizontalOptions="Center"
+                Margin="0,15,0,0">
+            
+            <Picker x:Name="MyPicker"
+                    TextColor="White"
+                    TitleColor="White"
+                    BackgroundColor="White"
+                    WidthRequest="350"
+                    ItemsSource="{Binding FromMeasures}"
+                    SelectedItem="{Binding CurrentFromMeasure}"/>
+        </Border>
+
+        <Border WidthRequest="350"
+                HeightRequest="290"
+                Stroke="#7B81FF"
+                Margin="0,40,0,0"
+                >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout>
+
+                <Label Text="Task Name"
+                       FontFamily="OutfitSemibold"
+                       FontSize="16"
+                       Margin="20,18,0,10"
+                       TextColor="Black"/>
+
+                <Entry WidthRequest="310"
+                       HeightRequest="50"
+                       BackgroundColor="#F3F0FF"
+                       FontFamily="OutfitRegular"
+                       FontSize="14"
+                       TextColor="Black"/>
+
+                <Label Text="Description"
+                       FontFamily="OutfitSemibold"
+                       FontSize="16"
+                       Margin="20,25,0,10"
+                       TextColor="Black"/>
+
+                <Editor PlaceholderColor="Gray"
+                        AutoSize="TextChanges"
+                        HeightRequest="100"
+                        VerticalOptions="Start" 
+                        WidthRequest="310"
+                        BackgroundColor="#F3F0FF"
+                        FontFamily="OutfitRegular"
+                        FontSize="14"
+                        TextColor="Black"/>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <Button WidthRequest="350"
+                HeightRequest="50"
+                CornerRadius="12"
+                Margin="0,50,0,0"
+                BackgroundColor="#C9CCFF"
+                Text="Add Task"
+                FontSize="16"
+                FontAttributes="Bold"
+                FontFamily="Poppins"
+                TextColor="#5E66FF"/>
+
+    </VerticalStackLayout>
+
+
+
+
+</ContentPage>
