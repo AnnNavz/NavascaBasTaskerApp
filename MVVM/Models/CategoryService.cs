@@ -12,8 +12,8 @@ namespace NavascaBasTaskerApp.MVVM.Models
 	{
 		public ObservableCollection<Category> Categories { get; } = new()
 		{
-			new Category { CategoryName = ".NET MAUI Course", Color = "#ff6f87" },
-			new Category { CategoryName = "Tutorials", Color = "#76ceff" }
+			new Category { Id = 1, CategoryName = ".NET MAUI Course", Color = "#ff6f87" },
+			new Category { Id = 2, CategoryName = "Tutorials", Color = "#76ceff" }
 		};
 
 		public void AddCategory(string name, string color)

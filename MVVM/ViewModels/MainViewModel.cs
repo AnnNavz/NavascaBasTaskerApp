@@ -1,4 +1,5 @@
 ﻿using NavascaBasTaskerApp.MVVM.Models;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using PropertyChanged;
+using System.Windows.Input;
 
 namespace NavascaBasTaskerApp.MVVM.ViewModels
 {
@@ -20,16 +21,87 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		public ObservableCollection<Category> Categories => _categoryService.Categories;
 		public ObservableCollection<MyTask> Tasks => _categoryService.AllTasks;
 
+		public ObservableCollection<MyTask> FilteredTasks { get; set; } = new();
+
+		public ICommand FilterTasksCommand => new Command<Category>((category) =>
+		{
+			if (category == null) return;
+
+			var filtered = _categoryService.AllTasks
+				.Where(t => t.CategoryId == category.Id)
+				.ToList();
+
+			FilteredTasks.Clear();
+			foreach (var task in filtered)
+			{
+				FilteredTasks.Add(task);
+			}
+		});
+
+		public void RefreshFilteredList()
+		{
+			FilteredTasks.Clear();
+			foreach (var task in Tasks)
+			{
+				FilteredTasks.Add(task);
+			}
+		}
+
 		// Any new properties you add here will automatically notify the UI
 		public string UserName { get; set; } = "Marven James Bas";
 
 		public MainViewModel(CategoryService categoryService)
 		{
 			_categoryService = categoryService;
-			Tasks.Add(new MyTask { TaskName = "Complete UI Design", TaskColor = "#ff6f87", Completed = false });
+
+
+			// 1. Listen for new tasks being added/removed
+			Tasks.CollectionChanged += (s, e) =>
+			{
+				RecalculateAll();
+				if (e.NewItems != null)
+				{
+					foreach (MyTask task in e.NewItems)
+						task.PropertyChanged += (sender, args) => { if (args.PropertyName == "Completed") RecalculateAll(); };
+				}
+			};
+
+			RefreshFilteredList();
+
+			// Ensure the UI updates when tasks are added or removed
+			Tasks.CollectionChanged += (s, e) => RefreshFilteredList();
+
+			// 2. Initial hook for existing tasks
+			foreach (var task in Tasks)
+			{
+				task.PropertyChanged += (s, e) => { if (e.PropertyName == "Completed") RecalculateAll(); };
+			}
+
+			RecalculateAll();
 		}
 
+		public void RecalculateAll()
+		{
+			foreach (var category in Categories)
+			{
+				category.UpdateProgress(Tasks);
+			}
+		}
 
+		public void UpdateCategoryProgress(Category category)
+		{
+			// Get all tasks belonging to this category from the shared service
+			var categoryTasks = _categoryService.AllTasks.Where(t => t.CategoryId == category.Id).ToList();
+
+			if (categoryTasks.Count == 0)
+			{
+				category.Percentage = 0;
+				return;
+			}
+
+			float completedTasks = categoryTasks.Count(t => t.Completed);
+			category.Percentage = completedTasks / categoryTasks.Count;
+		}
 
 
 	}

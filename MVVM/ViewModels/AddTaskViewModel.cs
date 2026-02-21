@@ -81,6 +81,8 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			// 3. IMPORTANT: Add it to the shared service list!
 			_categoryService.AllTasks.Add(newTask);
 
+			SelectedCategory.UpdateProgress(_categoryService.AllTasks);
+
 			await Application.Current.MainPage.Navigation.PopAsync();
 		}
 

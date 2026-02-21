@@ -53,7 +53,8 @@
                     ItemDisplayBinding="{Binding CategoryName}"
                     SelectedItem="{Binding SelectedCategory}"
                     WidthRequest="350"
-                    FontFamily="OutfitRegular"/>
+                    FontFamily="OutfitRegular"
+                    TextColor="Black"/>
         </Border>
 
         <Border WidthRequest="350"
