@@ -82,6 +82,7 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			_categoryService.AllTasks.Add(newTask);
 
 			SelectedCategory.UpdateProgress(_categoryService.AllTasks);
+			SelectedCategory.PendingTasks = _categoryService.AllTasks.Count(t => t.CategoryId == SelectedCategory.Id && !t.Completed);
 
 			await Application.Current.MainPage.Navigation.PopAsync();
 		}

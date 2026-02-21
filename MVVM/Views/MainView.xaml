@@ -264,32 +264,35 @@
                                                         </CheckBox>
                                                     </Border>
 
-                                                    <VerticalStackLayout Grid.Column="1">
+                                                    <Grid Grid.Column="1" 
+                                                          ColumnDefinitions="*, Auto" 
+                                                          Padding="15,0,15,0" 
+                                                          VerticalOptions="Center">
 
-                                                        <Label Text="{Binding TaskName}"
-                                                           TextColor="Black"
-                                                           FontFamily="OutfitSemibold"
-                                                           FontSize="16"
-                                                           VerticalOptions="Center"
-                                                           Margin="15,10,0,0"/>
+                                                        <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                                            <Label Text="{Binding TaskName}"
+                                                                   TextColor="Black"
+                                                                   FontFamily="OutfitSemibold"
+                                                                   FontSize="16"
+                                                                   LineBreakMode="TailTruncation"
+                                                                   MaxLines="1" />
 
-                                                        <Label Text="Pending" 
-                                                               TextColor="Gray" 
-                                                               FontSize="14"
-                                                               FontFamily="OutfitRegular"
-                                                               Margin="15,0,0,0">
-                                                            <Label.Triggers>
-                                                                <DataTrigger TargetType="Label"
-                                                                             Binding="{Binding Completed}"
-                                                                             Value="True">
-                                                                    <Setter Property="Text" Value="Done" />
-                                                                    <Setter Property="FontFamily" Value="OutfitRegular"/>
-                                                                    <Setter Property="TextColor" Value="#ffaa20" />
-                                                                </DataTrigger>
-                                                            </Label.Triggers>
-                                                        </Label>
+                                                            <Label Text="Pending" 
+                                                                   TextColor="Gray" 
+                                                                   FontSize="14"
+                                                                   FontFamily="OutfitRegular">
+                                                                <Label.Triggers>
+                                                                    <DataTrigger TargetType="Label"
+                                                                                 Binding="{Binding Completed}"
+                                                                                 Value="True">
+                                                                        <Setter Property="Text" Value="Done" />
+                                                                        <Setter Property="TextColor" Value="#ffaa20" />
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
+                                                            </Label>
+                                                        </VerticalStackLayout>
 
-                                                    </VerticalStackLayout>
+                                                    </Grid>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>

@@ -54,7 +54,8 @@
                     SelectedItem="{Binding SelectedCategory}"
                     WidthRequest="350"
                     FontFamily="OutfitRegular"
-                    TextColor="Black"/>
+                    TextColor="Black"
+                    BackgroundColor="#f3f0ff"/>
         </Border>
 
         <Border WidthRequest="350"

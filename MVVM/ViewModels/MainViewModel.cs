@@ -84,7 +84,12 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		{
 			foreach (var category in Categories)
 			{
+				// 1. Update the Progress Bar percentage
 				category.UpdateProgress(Tasks);
+
+				// 2. Update the Pending Tasks count
+				// We count only tasks that belong to this category AND are NOT completed
+				category.PendingTasks = Tasks.Count(t => t.CategoryId == category.Id && !t.Completed);
 			}
 		}
 
