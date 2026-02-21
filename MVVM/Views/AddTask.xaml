@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:NavascaBasTaskerApp.MVVM.ViewModels"
              x:Class="NavascaBasTaskerApp.Views.AddTask"
              Title="AddTask"
              BackgroundColor="White"
-             Shell.NavBarIsVisible="False">
+             NavigationPage.HasNavigationBar="False"
+             >
+
+
 
     <VerticalStackLayout>
         <Label Text="Add New Task"
                FontFamily="OutfitBold"
                FontSize="32"
                FontAttributes="Bold"
-               Margin="30,45,0,0"
+               Margin="30,60,0,0"
                TextColor="#5E66FF"/>
 
-        <Label Text="Select a Category"
+        <HorizontalStackLayout Margin="0,20,0,0">
+
+
+            <Label Text="Select a Category"
                FontFamily="OutfitSemibold"
                FontSize="18"
-               Margin="30,15,0,0"
+               Margin="30,10,0,0"
                TextColor="Black"/>
+
+            <Button WidthRequest="80"
+                    HeightRequest="10"
+                    CornerRadius="12"
+                    Margin="120,0,0,0"
+                    BackgroundColor="#ffaa20"
+                    Text="Add"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    FontFamily="OutfitBold"
+                    TextColor="White"
+                    Command="{Binding AddCategoryCommand}"
+                    />
+
+
+
+        </HorizontalStackLayout>
 
         <Border Stroke="#7B81FF"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 10"
                 HorizontalOptions="Center"
                 Margin="0,15,0,0">
-            
+
             <Picker x:Name="MyPicker"
-                    TextColor="White"
-                    TitleColor="White"
-                    BackgroundColor="White"
+                    ItemsSource="{Binding Categories}"
+                    ItemDisplayBinding="{Binding CategoryName}"
+                    SelectedItem="{Binding SelectedCategory}"
                     WidthRequest="350"
-                    ItemsSource="{Binding FromMeasures}"
-                    SelectedItem="{Binding CurrentFromMeasure}"/>
+                    FontFamily="OutfitRegular"/>
         </Border>
 
         <Border WidthRequest="350"
@@ -57,7 +80,8 @@
                        BackgroundColor="#F3F0FF"
                        FontFamily="OutfitRegular"
                        FontSize="14"
-                       TextColor="Black"/>
+                       TextColor="Black"
+                       Text="{Binding TaskName}"/>
 
                 <Label Text="Description"
                        FontFamily="OutfitSemibold"
@@ -66,6 +90,7 @@
                        TextColor="Black"/>
 
                 <Editor PlaceholderColor="Gray"
+                        Text="{Binding Description}"
                         AutoSize="TextChanges"
                         HeightRequest="100"
                         VerticalOptions="Start" 
@@ -87,7 +112,8 @@
                 FontSize="16"
                 FontAttributes="Bold"
                 FontFamily="Poppins"
-                TextColor="#5E66FF"/>
+                TextColor="#5E66FF"
+                Command="{Binding SaveTaskCommand}"/>
 
     </VerticalStackLayout>
 

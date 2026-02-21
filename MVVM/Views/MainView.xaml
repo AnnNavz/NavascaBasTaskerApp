@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:NavascaBasTaskerApp.MVVM.ViewModels"
+             x:Class="NavascaBasTaskerApp.MVVM.Views.MainView"
+             Title="MainView"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#c9ccff">
+
+
+
+    <Grid>
+
+        <ScrollView>
+
+            <VerticalStackLayout>
+
+                <Border WidthRequest="400" HeightRequest="95" BackgroundColor="#5E66FF" Stroke="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0,0,15,15"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="#343874"
+                        Offset="0,2"
+                        Radius="8"
+                        Opacity="0.8"/>
+                    </Border.Shadow>
+
+                    <Grid RowDefinitions="*,*"
+                  ColumnDefinitions="Auto, 3*, *">
+
+                        <Image Grid.RowSpan="2"
+                       Source="menu.png"
+                       WidthRequest="25"
+                       Margin="30,0,0,0"/>
+
+                        <Label Text="Welcome,"
+                       Grid.Column="1"
+                       FontFamily="OutfitRegular"
+                       TextColor="White"
+                       FontSize="15"
+                       Margin="0,30,0,0"
+                       HorizontalTextAlignment="End"/>
+
+                        <Label Text="Marven James Bas"
+                       Grid.Column="1"
+                       Grid.Row="1"
+                       FontFamily="OutfitSemibold"
+                       TextColor="White"
+                       FontSize="18"
+                       Margin="0,0,0,0"
+                       HorizontalTextAlignment="End"/>
+
+                        <Image Grid.Column="2"
+                       Grid.RowSpan="2"
+                       Source="user.png"
+                       WidthRequest="60"/>
+
+                    </Grid>
+                </Border>
+
+                <Border WidthRequest="400" MinimumHeightRequest="640" BackgroundColor="White" Margin="0,20,0,0" Stroke="White">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15,15,0,0"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="#212A40"
+                                Offset="0,-2"
+                                Radius="8"
+                                Opacity="0.45"/>
+                    </Border.Shadow>
+
+                    <Grid RowDefinitions="Auto, Auto, Auto, Auto">
+
+                        <HorizontalStackLayout>
+                            <Image Source="checklist.png"
+                       WidthRequest="40"
+                       Margin="30,30,0,0"
+                       HorizontalOptions="Start"/>
+
+                            <Label Text="My Tasks"
+                           FontSize="28"
+                           FontFamily="OutfitBold"
+                           Margin="10,30,0,0"
+                           TextColor="#5E66FF"/>
+                        </HorizontalStackLayout>
+
+
+                        <Label Text="Categories"
+                       Grid.Row="1"
+                       Margin="30,15,0,0"
+                       FontSize="18"
+                       FontFamily="OutfitRegular"
+                       TextColor="#7b81ff"
+                       />
+
+                        <CollectionView Grid.Row="2"
+                                        ItemsSource="{Binding Categories}"
+                                        HeightRequest="180"
+                                        Margin="20,0,0,0">
+                            
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border WidthRequest="220" HeightRequest="150" StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="25"/>
+                                        </Border.StrokeShape>
+                                        <Border.Shadow>
+                                            <Shadow Brush="#212A40"
+                                                    Offset="1,5"
+                                                    Radius="3"
+                                                    Opacity="0.6"/>
+                                        </Border.Shadow>
+
+                                        <Grid Padding="25">
+                                            <Grid.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="{Binding Color}" Offset="0.1" />
+                                                    <GradientStop Color="#4b51cc" Offset="2.0" />
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+
+                                            <VerticalStackLayout Spacing="5">
+
+                                                <Label Text="{Binding CategoryName}" 
+                                                       TextColor="White" 
+                                                       FontSize="24" 
+                                                       FontFamily="OutfitBold"
+                                                       Margin="0,5,0,0"/>
+
+                                                <Label Text="{Binding PendingTasks, StringFormat='Pending: {0}'}" 
+                                                       TextColor="White" 
+                                                       FontSize="14"
+                                                       FontFamily="OutfitRegular"
+                                                       Opacity="0.9"/>
+
+                                                
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Border Grid.Row="3"
+                                WidthRequest="340"
+                                MinimumHeightRequest="300"
+                                BackgroundColor="White"
+                                Stroke="Transparent"
+                                Margin="0,20,0,0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+
+                            <Border.Shadow>
+                                <Shadow Brush="#212A40"
+                                Offset="0,1"
+                                Radius="4"
+                                Opacity="0.5"/>
+                            </Border.Shadow>
+
+                            <Grid RowDefinitions="Auto, Auto">
+
+                                <HorizontalStackLayout>
+
+                                    <Label Text="Pending Tasks"
+                                        Grid.Row="1"
+                                        Margin="25,20,0,0"
+                                        FontSize="18"
+                                        FontFamily="OutfitSemibold"
+                                        TextColor="#7b81ff"
+                                        />
+
+                                    <Label Text="0"
+                                        Grid.Row="1"
+                                        Margin="8,22,0,0"
+                                        FontSize="15"
+                                        FontFamily="OutfitLight"
+                                        TextColor="#7b81ff"
+                                        />
+
+                                    <Button Text="See More"
+                                        Grid.Row="1"
+                                        Margin="70,11,0,0"
+                                        x:Name="SeeMore"
+                                        FontSize="15"
+                                        FontFamily="OutfitRegular"
+                                        TextColor="#7b81ff"
+                                        BackgroundColor="Transparent"
+                                        />
+
+
+                                </HorizontalStackLayout>
+
+                            </Grid>
+
+                        </Border>
+
+
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <ImageButton Source="plus.png"
+                     VerticalOptions="End"
+                     x:Name="AddTask"
+                     Clicked="AddTask_Clicked"
+                     HorizontalOptions="End"
+                     WidthRequest="85"
+                     Margin="25"
+                     BackgroundColor="Transparent"/>
+    </Grid>
+
+</ContentPage>

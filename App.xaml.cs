@@ -1,13 +1,19 @@
-﻿using NavascaBasTaskerApp.Views;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NavascaBasTaskerApp.MVVM.Views;
+using NavascaBasTaskerApp.Views;
+using System;
 
 namespace NavascaBasTaskerApp
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-			MainPage = new AppShell();
+
+			var mainPage = serviceProvider.GetService<NavascaBasTaskerApp.MVVM.Views.MainView>();
+
+			MainPage = new NavigationPage(mainPage);
 		}
 
         protected override Window CreateWindow(IActivationState? activationState)

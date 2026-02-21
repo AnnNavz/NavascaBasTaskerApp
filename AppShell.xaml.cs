@@ -7,6 +7,7 @@ namespace NavascaBasTaskerApp
         public AppShell()
         {
             InitializeComponent();
+			Routing.RegisterRoute(nameof(AddTask), typeof(AddTask));
 		}
     }
 }

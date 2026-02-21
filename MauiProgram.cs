@@ -1,5 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using NavascaBasTaskerApp.MVVM.Models;
+using NavascaBasTaskerApp.MVVM.ViewModels;
+using NavascaBasTaskerApp.MVVM.Views;
+using NavascaBasTaskerApp.Views;
+
+
 
 namespace NavascaBasTaskerApp
 {
@@ -26,8 +32,13 @@ namespace NavascaBasTaskerApp
 					fonts.AddFont("Outfit-Thin.ttf", "OutfitThin");
 				});
 
+			builder.Services.AddSingleton<CategoryService>();
+			builder.Services.AddTransient<MainViewModel>();
+			builder.Services.AddTransient<AddTaskViewModel>();
+			builder.Services.AddTransient<AddTask>();
+			builder.Services.AddTransient<MainView>();
 #if DEBUG
-    		builder.Logging.AddDebug();
+			builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
