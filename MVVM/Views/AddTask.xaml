@@ -25,12 +25,12 @@
                Margin="30,10,0,0"
                TextColor="Black"/>
 
-            <Button WidthRequest="80"
+            <Button WidthRequest="120"
                     HeightRequest="10"
                     CornerRadius="12"
-                    Margin="120,0,0,0"
+                    Margin="80,0,0,0"
                     BackgroundColor="#ffaa20"
-                    Text="Add"
+                    Text="Add Category"
                     FontSize="14"
                     FontAttributes="Bold"
                     FontFamily="OutfitBold"
@@ -109,6 +109,8 @@
                 Text="Add Task"
                 FontAttributes="Bold"
                 TextColor="#5E66FF"
+                FontFamily="OutfitBold"
+                FontSize="18"
                 Command="{Binding AddTaskCommand}"/>
 
     </VerticalStackLayout>
