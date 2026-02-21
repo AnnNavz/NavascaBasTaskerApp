@@ -18,6 +18,7 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 
 		// Binds to the shared singleton list
 		public ObservableCollection<Category> Categories => _categoryService.Categories;
+		public ObservableCollection<MyTask> Tasks => _categoryService.AllTasks;
 
 		// Any new properties you add here will automatically notify the UI
 		public string UserName { get; set; } = "Marven James Bas";
@@ -25,6 +26,11 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		public MainViewModel(CategoryService categoryService)
 		{
 			_categoryService = categoryService;
+			Tasks.Add(new MyTask { TaskName = "Complete UI Design", TaskColor = "#ff6f87", Completed = false });
 		}
+
+
+
+
 	}
 }

@@ -25,5 +25,8 @@ namespace NavascaBasTaskerApp.MVVM.Models
 				PendingTasks = 0
 			});
 		}
+
+		public ObservableCollection<MyTask> AllTasks { get; set; } = new();
+
 	}
 }

@@ -7,9 +7,7 @@
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False"
              >
-
-
-
+    
     <VerticalStackLayout>
         <Label Text="Add New Task"
                FontFamily="OutfitBold"
@@ -109,11 +107,9 @@
                 Margin="0,50,0,0"
                 BackgroundColor="#C9CCFF"
                 Text="Add Task"
-                FontSize="16"
                 FontAttributes="Bold"
-                FontFamily="Poppins"
                 TextColor="#5E66FF"
-                Command="{Binding SaveTaskCommand}"/>
+                Command="{Binding AddTaskCommand}"/>
 
     </VerticalStackLayout>
 

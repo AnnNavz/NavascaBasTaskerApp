@@ -19,10 +19,8 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 	{
 		private readonly CategoryService _categoryService;
 
-		// Binds to the shared singleton list
 		public ObservableCollection<Category> Categories => _categoryService.Categories;
 
-		// Auto-properties are now sufficient! Fody handles the rest.
 		public Category? SelectedCategory { get; set; }
 		public string TaskName { get; set; } = string.Empty;
 		public string Description { get; set; } = string.Empty;
@@ -30,7 +28,6 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		public ICommand AddCategoryCommand { get; }
 		public ICommand AddTaskCommand { get; }
 
-		// Constructor name matches class name
 		public AddTaskViewModel(CategoryService categoryService)
 		{
 			_categoryService = categoryService;
@@ -47,10 +44,8 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			{
 				var result = await Application.Current.MainPage.ShowPopupAsync(popup);
 
-				// Success: result is the anonymous object { Name, Color }
 				if (result != null)
 				{
-					// Cast to dynamic to access the properties easily
 					dynamic data = result;
 
 					string name = data.Name;
@@ -67,12 +62,26 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		{
 			if (string.IsNullOrWhiteSpace(TaskName) || SelectedCategory == null)
 			{
-				await Application.Current.MainPage.DisplayAlert("Error", "Missing information", "OK");
+				await Application.Current.MainPage.DisplayAlert("Error", "Missing Info", "OK");
 				return;
 			}
 
-			// Your logic to save the task to the service would go here
-			await Shell.Current.GoToAsync("..");
+			// 1. Increment count
+			SelectedCategory.PendingTasks++;
+
+			// 2. Create object
+			var newTask = new MyTask
+			{
+				TaskName = this.TaskName,
+				Completed = false,
+				CategoryId = SelectedCategory.Id,
+				TaskColor = SelectedCategory.Color
+			};
+
+			// 3. IMPORTANT: Add it to the shared service list!
+			_categoryService.AllTasks.Add(newTask);
+
+			await Application.Current.MainPage.Navigation.PopAsync();
 		}
 
 	}
