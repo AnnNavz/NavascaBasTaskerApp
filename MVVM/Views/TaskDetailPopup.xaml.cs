@@ -29,7 +29,7 @@ public partial class TaskDetailPopup : Popup
 			_oldDescription = task.Description;
 
 			IsEditMode = true;
-			EditSaveBtn.Text = "Save";
+			EditSaveBtn.Text = "SAVE";
 			EditSaveBtn.BackgroundColor = Colors.Orange;
 		}
 		else
@@ -53,6 +53,14 @@ public partial class TaskDetailPopup : Popup
 		OnPropertyChanged(nameof(IsEditMode));
 	}
 
-	private void OnCloseClicked(object sender, EventArgs e) => Close();
+	private async void OnDeleteClicked(object sender, EventArgs e)
+	{
+		bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Task", "Are you sure you want to delete this task?", "Delete", "Cancel");
+
+		if (confirm)
+		{
+			Close("DeleteRequested");
+		}
+	}
 
 }

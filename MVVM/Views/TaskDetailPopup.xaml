@@ -28,18 +28,20 @@
                            Margin="0,10,0,20"/>
 
                     <Label Text="Task Name" TextColor="Gray" FontSize="14" FontFamily="OutfitRegular" Margin="0,0,0,5"/>
-                    <Label Text="{Binding TaskName}" FontSize="20" FontFamily="OutfitBold"
+                    <Label Text="{Binding TaskName}" FontSize="20" FontFamily="OutfitBold" TextColor="Black"
                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"/>
                     <Entry Text="{Binding TaskName}" 
                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}"
                            BackgroundColor="#F3F0FF" 
                            FontFamily="OutfitBold"
-                           FontSize="16"/>
+                           FontSize="16"
+                           TextColor="Black"/>
 
                     <Label Text="Description" TextColor="Gray" FontSize="14" FontFamily="OutfitRegular" Margin="0,20,0,10"/>
-                    <Label Text="{Binding Description}" FontSize="15" LineBreakMode="WordWrap"
+                    <Label Text="{Binding Description}" FontSize="15" LineBreakMode="WordWrap" TextColor="Black" FontFamily="OutfitRegular"
                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"/>
                     <Editor Text="{Binding Description}" 
+                            TextColor="Black"
                             IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}"
                             HeightRequest="150" 
                             BackgroundColor="#F3F0FF" 
@@ -58,23 +60,24 @@
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" Padding="20">
 
                     <Button x:Name="EditSaveBtn" 
-                            Text="Edit" 
+                            Text="EDIT" 
                             Clicked="OnEditSaveClicked" 
                             WidthRequest="100" 
                             BackgroundColor="#5E66FF"
                             TextColor="White"
                             FontFamily="OutfitBold"
                             FontSize="14"/>
+                    
+                    
+                    <Button Text="DELETE" 
+            Clicked="OnDeleteClicked" 
+            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"
+            BackgroundColor="Transparent" 
+            TextColor="Red"
+            FontFamily="OutfitBold"
+            FontSize="14"/>
 
-                    <Button Text="Close" 
-                            Clicked="OnCloseClicked" 
-                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"
-                            BackgroundColor="Transparent" 
-                            TextColor="Gray"
-                            FontFamily="OutfitBold"
-                            FontSize="14"/>
-
-                    <Button Text="Cancel" 
+                    <Button Text="CANCEL" 
                             Clicked="OnCancelClicked" 
                             IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}"
                             BackgroundColor="Transparent" 

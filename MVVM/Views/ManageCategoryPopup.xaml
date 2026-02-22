@@ -1,0 +1,35 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="NavascaBasTaskerApp.MVVM.Views.ManageCategoryPopup"
+               Color="Transparent">
+
+    <Border BackgroundColor="White" WidthRequest="300" HeightRequest="220" Stroke="White">
+
+        <Border.Shadow>
+            <Shadow Brush="Black" Offset="0,1" Radius="5" Opacity="0.6"/>
+        </Border.Shadow>
+        
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="20"/>
+        </Border.StrokeShape>
+
+        <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+            <Label Text="Category Options" FontSize="24" FontFamily="OutfitBold" 
+                   HorizontalOptions="Center" TextColor="#5E66FF"
+                   Margin="0,0,0,10"/>
+
+            <Button Text="EDIT NAME" ImageSource="edit_icon.png"
+                    BackgroundColor="#f3f0ff" TextColor="#5E66FF"
+                    FontFamily="OutfitSemibold" HeightRequest="50"
+                    Clicked="OnEditClicked"
+                    FontSize="16"/>
+
+            <Button Text="DELETE" ImageSource="delete_icon.png"
+                    BackgroundColor="#ffebee" TextColor="Red"
+                    FontFamily="OutfitSemibold" HeightRequest="50"
+                    FontSize="16"
+                    Clicked="OnDeleteClicked"/>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

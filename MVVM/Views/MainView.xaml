@@ -97,7 +97,26 @@
                                         ItemsSource="{Binding Categories}"
                                         HeightRequest="180"
                                         Margin="20,0,0,0">
-                            
+
+                            <CollectionView.EmptyView>
+                                
+                                <VerticalStackLayout HorizontalOptions="Center"
+                                                             VerticalOptions="Center"
+                                                             Padding="0,0,0,0">
+                                    <Label Text="No Categories found!"
+                                                   TextColor="Gray"
+                                                   FontSize="18"
+                                                   FontFamily="OutfitMedium"
+                                                    HorizontalOptions="Center"/>
+
+                                    <Label Text="Tap the '+' button to add a new category."
+                                                   TextColor="Silver"
+                                                   FontSize="14"
+                                                   FontFamily="OutfitRegular"
+                                                   HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </CollectionView.EmptyView>
+
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                             </CollectionView.ItemsLayout>
@@ -231,6 +250,32 @@
                                                 Grid.ColumnSpan="2"
                                                 Margin="0,0,0,30">
 
+                                    <CollectionView.EmptyView>
+                                        <VerticalStackLayout HorizontalOptions="Center"
+                                                             VerticalOptions="Center"
+                                                             Padding="0,35,0,0">
+
+                                            <Image Source="empty_tasks.png"
+                                                   HorizontalOptions="Center"
+                                                   WidthRequest="80"
+                                                   Opacity="0.6"
+                                                   />
+                                            
+                                            <Label Text="No tasks found!"
+                                                   TextColor="Gray"
+                                                   FontSize="18"
+                                                   FontFamily="OutfitMedium"
+                                                    HorizontalOptions="Center"
+                                                   Margin="0,10,0,0"/>
+
+                                            <Label Text="Tap the '+' button to add a new task."
+                                                   TextColor="Silver"
+                                                   FontSize="14"
+                                                   FontFamily="OutfitRegular"
+                                                   HorizontalOptions="Center" />
+                                        </VerticalStackLayout>
+                                    </CollectionView.EmptyView>
+
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
                                     </CollectionView.ItemsLayout>
@@ -332,15 +377,42 @@
             </VerticalStackLayout>
 
         </ScrollView>
+        
+        <Grid VerticalOptions="End" 
+              HorizontalOptions="End" 
+              Margin="25"
+              RowDefinitions="*, *, *">
 
-        <ImageButton Source="plus.png"
-                     VerticalOptions="End"
-                     x:Name="AddTask"
-                     Clicked="AddTask_Clicked"
-                     HorizontalOptions="End"
-                     WidthRequest="85"
-                     Margin="25"
-                     BackgroundColor="Transparent"/>
+            <ImageButton x:Name="btnCategory"
+                 Grid.Row="0"
+                 Source="add_category.png"
+                         WidthRequest="75"
+                 Scale="0"
+                 Opacity="0"
+                 BackgroundColor="Transparent"
+                 CornerRadius="30"
+                 Margin="0,0,0,10"
+                         
+                    Command="{Binding AddCategoryCommand}"/>
+
+            <ImageButton x:Name="btnTask"
+                 Grid.Row="1"
+                 Source="add_tasks.png"
+                         WidthRequest="75"
+                 Scale="0"
+                 Opacity="0"
+                 Clicked="AddTask_Clicked"
+                 BackgroundColor="Transparent"
+                 CornerRadius="30"
+                 Margin="0,0,0,10" />
+
+            <ImageButton x:Name="MainFab"
+                 Grid.Row="2"
+                 Source="plus.png"
+                 WidthRequest="85"
+                 BackgroundColor="Transparent"
+                 Clicked="OnMainFabClicked" />
+        </Grid>
     </Grid>
 
 </ContentPage>

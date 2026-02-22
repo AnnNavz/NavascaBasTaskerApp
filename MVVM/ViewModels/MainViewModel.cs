@@ -30,6 +30,8 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 
 		public string StatusFilter { get; set; } = "All";
 
+		public ICommand AddCategoryCommand { get; }
+
 		public ICommand ToggleStatusFilterCommand => new Command(() =>
 		{
 			if (StatusFilter == "All") StatusFilter = "Pending";
@@ -90,6 +92,9 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			_categoryService = categoryService;
 
 
+			AddCategoryCommand = new Command(OnAddCategory);
+
+
 			Tasks.CollectionChanged += (s, e) =>
 			{
 				RecalculateAll();
@@ -112,6 +117,29 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			RecalculateAll();
 		}
 
+
+		private async void OnAddCategory()
+		{
+			var popup = new NavascaBasTaskerApp.MVVM.Views.CategoryPopup();
+
+			if (Application.Current?.MainPage != null)
+			{
+				var result = await Application.Current.MainPage.ShowPopupAsync(popup);
+
+				if (result != null)
+				{
+					dynamic data = result;
+
+					string name = data.Name;
+					string color = data.Color;
+
+					if (!string.IsNullOrWhiteSpace(name))
+					{
+						_categoryService.AddCategory(name, color);
+					}
+				}
+			}
+		}
 		public void RecalculateAll()
 		{
 			foreach (var category in Categories)
@@ -145,7 +173,12 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 
 			var popup = new TaskDetailPopup(task, catName);
 
-			await Application.Current.MainPage.ShowPopupAsync(popup);
+			var result = await Application.Current.MainPage.ShowPopupAsync(popup);
+
+			if (result is string action && action == "DeleteRequested")
+			{
+				Tasks.Remove(task);
+			}
 
 			RecalculateAll();
 		});
@@ -154,14 +187,36 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		{
 			if (category == null) return;
 
-			string result = await Application.Current.MainPage.DisplayPromptAsync(
-				"Edit Category",
-				"Enter new category name:",
-				initialValue: category.CategoryName);
+			var popup = new ManageCategoryPopup();
+			var result = await Application.Current.MainPage.ShowPopupAsync(popup);
 
-			if (!string.IsNullOrWhiteSpace(result))
+			if (result is string action)
 			{
-				category.CategoryName = result;
+				if (action == "edit")
+				{
+					string newName = await Application.Current.MainPage.DisplayPromptAsync(
+						"Update Name", "Enter new name (max 20 chars):",
+						initialValue: category.CategoryName, maxLength: 20);
+
+					if (!string.IsNullOrWhiteSpace(newName))
+						category.CategoryName = newName;
+
+				}
+				else if (action == "delete")
+				{
+					bool confirm = await Application.Current.MainPage.DisplayAlert(
+						"Warning", $"Delete '{category.CategoryName}' and its tasks?", "Delete", "Cancel");
+
+					if (confirm)
+					{
+						var tasksToRemove = Tasks.Where(t => t.CategoryId == category.Id).ToList();
+						foreach (var task in tasksToRemove) Tasks.Remove(task);
+
+						Categories.Remove(category);
+						RecalculateAll();
+						RefreshFilteredList();
+					}
+				}
 			}
 		});
 
