@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:NavascaBasTaskerApp.MVVM.Views"
              xmlns:viewmodels="clr-namespace:NavascaBasTaskerApp.MVVM.ViewModels"
              x:Class="NavascaBasTaskerApp.MVVM.Views.MainView"
              Title="MainView"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#c9ccff">
-
-
-
     <Grid>
 
         <ScrollView>
@@ -27,7 +26,7 @@
                     </Border.Shadow>
 
                     <Grid RowDefinitions="*,*"
-                  ColumnDefinitions="Auto, 3*, *">
+                          ColumnDefinitions="Auto, 3*, *">
 
                         <Image Grid.RowSpan="2"
                        Source="menu.png"
@@ -74,26 +73,26 @@
 
                         <HorizontalStackLayout>
                             <Image Source="checklist.png"
-                       WidthRequest="40"
-                       Margin="30,30,0,0"
-                       HorizontalOptions="Start"/>
+                                   WidthRequest="40"
+                                   Margin="30,30,0,0"
+                                   HorizontalOptions="Start"/>
 
                             <Label Text="My Tasks"
-                           FontSize="28"
-                           FontFamily="OutfitBold"
-                           Margin="10,30,0,0"
-                           TextColor="#5E66FF"/>
+                                   FontSize="28"
+                                   FontFamily="OutfitBold"
+                                   Margin="10,30,0,0"
+                                   TextColor="#5E66FF"/>
                         </HorizontalStackLayout>
 
 
                         <Label Text="Categories"
-                       Grid.Row="1"
-                       Margin="30,15,0,0"
-                       FontSize="18"
-                       FontFamily="OutfitRegular"
-                       TextColor="#7b81ff"
+                               Grid.Row="1"
+                               Margin="30,15,0,0"
+                               FontSize="18"
+                               FontFamily="OutfitRegular"
+                               TextColor="#7b81ff"
                        />
-
+                        
                         <CollectionView Grid.Row="2"
                                         ItemsSource="{Binding Categories}"
                                         HeightRequest="180"
@@ -127,6 +126,7 @@
                                                 </LinearGradientBrush>
                                             </Grid.Background>
 
+
                                             <VerticalStackLayout Spacing="5">
 
                                                 <Label Text="{Binding CategoryName}" 
@@ -158,11 +158,24 @@
 
 
                                             </VerticalStackLayout>
+
+                                            <ImageButton Source="edit.png" 
+                                                        HorizontalOptions="End" 
+                         VerticalOptions="Start"
+                         WidthRequest="25"
+                         HeightRequest="25"
+                         BackgroundColor="Transparent"
+                         Aspect="AspectFit"
+                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditCategoryCommand}"
+                         CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
+                        
+                        
+                        
 
                         <Border Grid.Row="3"
                                 WidthRequest="360"
@@ -209,6 +222,8 @@
                                        Margin="0,25,0,0"
                                        x:Name="filter"
                                         />
+                                
+                                
 
 
                                 <CollectionView ItemsSource="{Binding FilteredTasks}"
@@ -263,7 +278,7 @@
                                                         </CheckBox>
                                                     </Border>
 
-                                                    <Border Grid.Column="1">
+                                                    <Border Grid.Column="1" Stroke="White">
                                                         <Border.GestureRecognizers>
                                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditTaskCommand}"
                                                                                   CommandParameter="{Binding .}" />

@@ -66,10 +66,8 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 				return;
 			}
 
-			// 1. Increment count
 			SelectedCategory.PendingTasks++;
 
-			// 2. Create object
 			var newTask = new MyTask
 			{
 				TaskName = this.TaskName,
@@ -79,7 +77,6 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 				TaskColor = SelectedCategory.Color
 			};
 
-			// 3. IMPORTANT: Add it to the shared service list!
 			_categoryService.AllTasks.Add(newTask);
 
 			SelectedCategory.UpdateProgress(_categoryService.AllTasks);

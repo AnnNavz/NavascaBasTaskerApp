@@ -52,7 +52,7 @@
             <Border Grid.Row="1" BackgroundColor="White" WidthRequest="320" HeightRequest="90" Stroke="Transparent">
 
                 <Border.Shadow>
-                    <Shadow Brush="White" Offset="0,-5" Radius="5" Opacity="0.9"/>
+                    <Shadow Brush="White" Offset="0,-5" Radius="5" Opacity="0.6"/>
                 </Border.Shadow>
 
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" Padding="20">

@@ -8,7 +8,7 @@ namespace NavascaBasTaskerApp.MVVM.Views
 		
 		public CategoryPopup()
 		{
-			InitializeComponent(); // Only call this once!
+			InitializeComponent();
 
 			var colors = new List<string>
 	{
@@ -30,7 +30,6 @@ namespace NavascaBasTaskerApp.MVVM.Views
 
 			if (!string.IsNullOrWhiteSpace(CategoryEntry.Text))
 			{
-				// Return the object to the ViewModel
 				Close(new { Name = CategoryEntry.Text, Color = selectedColor });
 			}
 		}

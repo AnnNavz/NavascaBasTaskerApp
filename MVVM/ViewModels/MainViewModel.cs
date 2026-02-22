@@ -19,7 +19,7 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 	{
 		private readonly CategoryService _categoryService;
 
-		// Binds to the shared singleton list
+
 		public ObservableCollection<Category> Categories => _categoryService.Categories;
 		public ObservableCollection<MyTask> Tasks => _categoryService.AllTasks;
 
@@ -49,7 +49,6 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			}
 		}
 
-		// Any new properties you add here will automatically notify the UI
 		public string UserName { get; set; } = "Marven James Bas";
 
 		public MainViewModel(CategoryService categoryService)
@@ -57,7 +56,6 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			_categoryService = categoryService;
 
 
-			// 1. Listen for new tasks being added/removed
 			Tasks.CollectionChanged += (s, e) =>
 			{
 				RecalculateAll();
@@ -70,10 +68,8 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 
 			RefreshFilteredList();
 
-			// Ensure the UI updates when tasks are added or removed
 			Tasks.CollectionChanged += (s, e) => RefreshFilteredList();
 
-			// 2. Initial hook for existing tasks
 			foreach (var task in Tasks)
 			{
 				task.PropertyChanged += (s, e) => { if (e.PropertyName == "Completed") RecalculateAll(); };
@@ -86,18 +82,14 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		{
 			foreach (var category in Categories)
 			{
-				// 1. Update the Progress Bar percentage
 				category.UpdateProgress(Tasks);
 
-				// 2. Update the Pending Tasks count
-				// We count only tasks that belong to this category AND are NOT completed
 				category.PendingTasks = Tasks.Count(t => t.CategoryId == category.Id && !t.Completed);
 			}
 		}
 
 		public void UpdateCategoryProgress(Category category)
 		{
-			// Get all tasks belonging to this category from the shared service
 			var categoryTasks = _categoryService.AllTasks.Where(t => t.CategoryId == category.Id).ToList();
 
 			if (categoryTasks.Count == 0)
@@ -114,17 +106,31 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		{
 			if (task == null) return;
 
-			// Get the category name for display
 			var category = Categories.FirstOrDefault(c => c.Id == task.CategoryId);
 			string catName = category?.CategoryName ?? "General";
 
 			var popup = new TaskDetailPopup(task, catName);
 
-			// Show the popup
 			await Application.Current.MainPage.ShowPopupAsync(popup);
 
-			// Recalculate progress in case the name/status changed
 			RecalculateAll();
+		});
+
+		public ICommand EditCategoryCommand => new Command<Category>(async (category) =>
+		{
+			if (category == null) return;
+
+			// Show a prompt to the user to type the new name
+			string result = await Application.Current.MainPage.DisplayPromptAsync(
+				"Edit Category",
+				"Enter new category name:",
+				initialValue: category.CategoryName);
+
+			if (!string.IsNullOrWhiteSpace(result))
+			{
+				category.CategoryName = result;
+				// Since Category uses [AddINotifyPropertyChangedInterface], the UI updates automatically
+			}
 		});
 
 

@@ -26,7 +26,6 @@ public partial class TaskDetailPopup : Popup
 
 		if (!IsEditMode)
 		{
-			// Entering Edit Mode: Backup the data
 			_oldName = task.TaskName;
 			_oldDescription = task.Description;
 
@@ -36,7 +35,6 @@ public partial class TaskDetailPopup : Popup
 		}
 		else
 		{
-			// Saving: Data is already updated via bindings
 			Close(task);
 		}
 		OnPropertyChanged(nameof(IsEditMode));
@@ -46,11 +44,9 @@ public partial class TaskDetailPopup : Popup
 	{
 		var task = BindingContext as MyTask;
 
-		// Revert the data to the backups
 		task.TaskName = _oldName;
 		task.Description = _oldDescription;
 
-		// Go back to View Mode
 		IsEditMode = false;
 		EditSaveBtn.Text = "Edit";
 		EditSaveBtn.BackgroundColor = Color.FromArgb("#5E66FF");
