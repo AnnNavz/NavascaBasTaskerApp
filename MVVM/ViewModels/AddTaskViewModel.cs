@@ -73,6 +73,7 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			var newTask = new MyTask
 			{
 				TaskName = this.TaskName,
+				Description = this.Description,
 				Completed = false,
 				CategoryId = SelectedCategory.Id,
 				TaskColor = SelectedCategory.Color

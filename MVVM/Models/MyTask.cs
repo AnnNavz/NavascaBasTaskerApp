@@ -17,6 +17,9 @@ namespace NavascaBasTaskerApp.MVVM.Models
 		public int CategoryId { get; set; }
 		public string TaskColor { get; set; }
 
+		public string Description { get; set; }
+
 		public event PropertyChangedEventHandler PropertyChanged;
+
 	}
 }

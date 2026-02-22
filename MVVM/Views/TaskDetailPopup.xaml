@@ -1,0 +1,90 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:local="clr-namespace:NavascaBasTaskerApp.MVVM.Views"
+               x:Class="NavascaBasTaskerApp.MVVM.Views.TaskDetailPopup"
+               Color="Transparent">
+    
+    <Border BackgroundColor="White" 
+            StrokeShape="RoundRectangle 20" 
+            Padding="0" 
+            WidthRequest="340"
+            MaximumHeightRequest="300"
+            Stroke="Transparent">
+
+        <Border.Shadow>
+            <Shadow Brush="Black" Offset="0,1" Radius="20" Opacity="0.3"/>
+        </Border.Shadow>
+        
+        
+        <Grid RowDefinitions="*, Auto">
+
+            <ScrollView VerticalScrollBarVisibility="Always" Padding="25">
+                <VerticalStackLayout>
+
+                    <Label Text="{Binding DisplayCategoryName, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}" 
+                           TextColor="{Binding TaskColor}" 
+                           FontFamily="OutfitBold" FontSize="16"
+                           Margin="0,10,0,20"/>
+
+                    <Label Text="Task Name" TextColor="Gray" FontSize="14" FontFamily="OutfitRegular" Margin="0,0,0,5"/>
+                    <Label Text="{Binding TaskName}" FontSize="20" FontFamily="OutfitBold"
+                           IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"/>
+                    <Entry Text="{Binding TaskName}" 
+                           IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}"
+                           BackgroundColor="#F3F0FF" 
+                           FontFamily="OutfitBold"
+                           FontSize="16"/>
+
+                    <Label Text="Description" TextColor="Gray" FontSize="14" FontFamily="OutfitRegular" Margin="0,20,0,10"/>
+                    <Label Text="{Binding Description}" FontSize="15" LineBreakMode="WordWrap"
+                           IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"/>
+                    <Editor Text="{Binding Description}" 
+                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}"
+                            HeightRequest="150" 
+                            BackgroundColor="#F3F0FF" 
+                            FontFamily="OutfitRegular"
+                            FontSize="14"/>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Border Grid.Row="1" BackgroundColor="White" WidthRequest="320" HeightRequest="90" Stroke="Transparent">
+
+                <Border.Shadow>
+                    <Shadow Brush="White" Offset="0,-5" Radius="5" Opacity="0.9"/>
+                </Border.Shadow>
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center" Padding="20">
+
+                    <Button x:Name="EditSaveBtn" 
+                            Text="Edit" 
+                            Clicked="OnEditSaveClicked" 
+                            WidthRequest="100" 
+                            BackgroundColor="#5E66FF"
+                            TextColor="White"
+                            FontFamily="OutfitBold"
+                            FontSize="14"/>
+
+                    <Button Text="Close" 
+                            Clicked="OnCloseClicked" 
+                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"
+                            BackgroundColor="Transparent" 
+                            TextColor="Gray"
+                            FontFamily="OutfitBold"
+                            FontSize="14"/>
+
+                    <Button Text="Cancel" 
+                            Clicked="OnCancelClicked" 
+                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}}"
+                            BackgroundColor="Transparent" 
+                            TextColor="Gray"
+                            FontFamily="OutfitBold"
+                            FontSize="14"/>
+                </HorizontalStackLayout>
+
+            </Border>
+
+        </Grid>
+    </Border>
+</toolkit:Popup>

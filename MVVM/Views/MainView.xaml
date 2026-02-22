@@ -115,9 +115,8 @@
                                                     Opacity="0.6"/>
                                         </Border.Shadow>
                                         <Border.GestureRecognizers>
-                                            <TapGestureRecognizer 
-            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=FilterTasksCommand}"
-            CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=FilterTasksCommand}"
+                                                                  CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
                                         <Grid Padding="20,15,20,0">
@@ -250,7 +249,7 @@
                                                                     <VisualStateGroup x:Name="CommonStates">
                                                                         <VisualState x:Name="IsChecked">
                                                                             <VisualState.Setters>
-                                                                                <Setter Property="Color" Value="white" />
+                                                                                <Setter Property="Color" Value="transparent" />
                                                                             </VisualState.Setters>
                                                                         </VisualState>
                                                                         <VisualState x:Name="Normal">
@@ -264,35 +263,42 @@
                                                         </CheckBox>
                                                     </Border>
 
-                                                    <Grid Grid.Column="1" 
-                                                          ColumnDefinitions="*, Auto" 
-                                                          Padding="15,0,15,0" 
-                                                          VerticalOptions="Center">
+                                                    <Border Grid.Column="1">
+                                                        <Border.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditTaskCommand}"
+                                                                                  CommandParameter="{Binding .}" />
+                                                        </Border.GestureRecognizers>
 
-                                                        <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-                                                            <Label Text="{Binding TaskName}"
+                                                        <Grid ColumnDefinitions="*, Auto" 
+                                                              Padding="15,0,15,0" 
+                                                              VerticalOptions="Center">
+
+                                                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                                                <Label Text="{Binding TaskName}"
                                                                    TextColor="Black"
                                                                    FontFamily="OutfitSemibold"
                                                                    FontSize="16"
                                                                    LineBreakMode="TailTruncation"
                                                                    MaxLines="1" />
 
-                                                            <Label Text="Pending" 
+                                                                <Label Text="Pending" 
                                                                    TextColor="Gray" 
                                                                    FontSize="14"
                                                                    FontFamily="OutfitRegular">
-                                                                <Label.Triggers>
-                                                                    <DataTrigger TargetType="Label"
+                                                                    <Label.Triggers>
+                                                                        <DataTrigger TargetType="Label"
                                                                                  Binding="{Binding Completed}"
                                                                                  Value="True">
-                                                                        <Setter Property="Text" Value="Done" />
-                                                                        <Setter Property="TextColor" Value="#ffaa20" />
-                                                                    </DataTrigger>
-                                                                </Label.Triggers>
-                                                            </Label>
-                                                        </VerticalStackLayout>
+                                                                            <Setter Property="Text" Value="Done" />
+                                                                            <Setter Property="TextColor" Value="#ffaa20" />
+                                                                        </DataTrigger>
+                                                                    </Label.Triggers>
+                                                                </Label>
+                                                            </VerticalStackLayout>
 
-                                                    </Grid>
+                                                        </Grid>
+
+                                                    </Border>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>

@@ -1,4 +1,5 @@
-﻿using NavascaBasTaskerApp.MVVM.Models;
+﻿using CommunityToolkit.Maui.Views;
+using NavascaBasTaskerApp.MVVM.Models;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NavascaBasTaskerApp.MVVM.Views;
 
 namespace NavascaBasTaskerApp.MVVM.ViewModels
 {
@@ -107,6 +109,23 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			float completedTasks = categoryTasks.Count(t => t.Completed);
 			category.Percentage = completedTasks / categoryTasks.Count;
 		}
+
+		public ICommand EditTaskCommand => new Command<MyTask>(async (task) =>
+		{
+			if (task == null) return;
+
+			// Get the category name for display
+			var category = Categories.FirstOrDefault(c => c.Id == task.CategoryId);
+			string catName = category?.CategoryName ?? "General";
+
+			var popup = new TaskDetailPopup(task, catName);
+
+			// Show the popup
+			await Application.Current.MainPage.ShowPopupAsync(popup);
+
+			// Recalculate progress in case the name/status changed
+			RecalculateAll();
+		});
 
 
 	}
