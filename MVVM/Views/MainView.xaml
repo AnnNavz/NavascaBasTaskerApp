@@ -161,22 +161,19 @@
 
                                             <ImageButton Source="edit.png" 
                                                         HorizontalOptions="End" 
-                         VerticalOptions="Start"
-                         WidthRequest="25"
-                         HeightRequest="25"
-                         BackgroundColor="Transparent"
-                         Aspect="AspectFit"
-                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditCategoryCommand}"
-                         CommandParameter="{Binding .}"/>
+                                                        VerticalOptions="Start"
+                                                        WidthRequest="25"
+                                                        HeightRequest="25"
+                                                        BackgroundColor="Transparent"
+                                                        Aspect="AspectFit"
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditCategoryCommand}"
+                                                        CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                         
-                        
-                        
-
                         <Border Grid.Row="3"
                                 WidthRequest="360"
                                 MinimumHeightRequest="300"
@@ -199,29 +196,27 @@
                                   ColumnDefinitions="10*, 3*">
 
                                 <HorizontalStackLayout Margin="0,25,0,0">
+                                    <Label Text="{Binding FilterHeader}"
+           Margin="25,0,0,0"
+           FontSize="18"
+           FontFamily="OutfitSemibold"
+           TextColor="#7b81ff" />
 
-                                    <Label Text="Pending Tasks"
-                                       Margin="25,0,0,0"
-                                       FontSize="18"
-                                       FontFamily="OutfitSemibold"
-                                       TextColor="#7b81ff"
-                                        />
-
-                                    <Label Text="{Binding Tasks.Count}"
-                                       Margin="8,2,0,0"
-                                       FontSize="15"
-                                       FontFamily="OutfitLight"
-                                       TextColor="#7b81ff"
-                                        />
+                                    <Label Text="{Binding FilteredTasks.Count}"
+           Margin="8,2,0,0"
+           FontSize="15"
+           FontFamily="OutfitLight"
+           TextColor="#7b81ff" />
 
                                 </HorizontalStackLayout>
 
-                                <Image Source="filter.png"
-                                       Grid.Column="1"
-                                       WidthRequest="28"
-                                       Margin="0,25,0,0"
-                                       x:Name="filter"
-                                        />
+                                <ImageButton Source="filter.png"
+                                             Grid.Column="1"
+                                             WidthRequest="28"
+                                             Margin="0,1,0,0"
+                                             x:Name="filter"
+                                             Command="{Binding ToggleStatusFilterCommand}"
+                                             />
                                 
                                 
 

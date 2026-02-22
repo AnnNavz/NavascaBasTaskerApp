@@ -20,21 +20,38 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		private readonly CategoryService _categoryService;
 
 
+
 		public ObservableCollection<Category> Categories => _categoryService.Categories;
 		public ObservableCollection<MyTask> Tasks => _categoryService.AllTasks;
 
 		public ObservableCollection<MyTask> FilteredTasks { get; set; } = new();
 
+		public string FilterHeader { get; set; } = "Pending Tasks"; 
+
+		public string StatusFilter { get; set; } = "All";
+
+		public ICommand ToggleStatusFilterCommand => new Command(() =>
+		{
+			if (StatusFilter == "All") StatusFilter = "Pending";
+			else if (StatusFilter == "Pending") StatusFilter = "Done";
+			else StatusFilter = "All";
+
+			RefreshFilteredList();
+		});
+
 		public ICommand FilterTasksCommand => new Command<Category>((category) =>
 		{
 			if (category == null) return;
 
-			var filtered = _categoryService.AllTasks
-				.Where(t => t.CategoryId == category.Id)
-				.ToList();
+			var query = _categoryService.AllTasks.Where(t => t.CategoryId == category.Id);
+
+			if (StatusFilter == "Pending")
+				query = query.Where(t => !t.Completed);
+			else if (StatusFilter == "Done")
+				query = query.Where(t => t.Completed);
 
 			FilteredTasks.Clear();
-			foreach (var task in filtered)
+			foreach (var task in query)
 			{
 				FilteredTasks.Add(task);
 			}
@@ -42,8 +59,25 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 
 		public void RefreshFilteredList()
 		{
+			var query = Tasks.AsEnumerable();
+
+			if (StatusFilter == "Pending")
+			{
+				query = query.Where(t => !t.Completed);
+				FilterHeader = "Pending Tasks";
+			}
+			else if (StatusFilter == "Done")
+			{
+				query = query.Where(t => t.Completed);
+				FilterHeader = "Completed Tasks";
+			}
+			else
+			{
+				FilterHeader = "All Tasks";
+			}
+
 			FilteredTasks.Clear();
-			foreach (var task in Tasks)
+			foreach (var task in query)
 			{
 				FilteredTasks.Add(task);
 			}
@@ -120,7 +154,6 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 		{
 			if (category == null) return;
 
-			// Show a prompt to the user to type the new name
 			string result = await Application.Current.MainPage.DisplayPromptAsync(
 				"Edit Category",
 				"Enter new category name:",
@@ -129,7 +162,6 @@ namespace NavascaBasTaskerApp.MVVM.ViewModels
 			if (!string.IsNullOrWhiteSpace(result))
 			{
 				category.CategoryName = result;
-				// Since Category uses [AddINotifyPropertyChangedInterface], the UI updates automatically
 			}
 		});
 
