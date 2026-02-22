@@ -17,6 +17,18 @@ namespace NavascaBasTaskerApp.MVVM.Views
 
 			ColorCollectionView.ItemsSource = colors;
 			ColorCollectionView.SelectedItem = colors[0];
+
+			CategoryEntry.TextChanged += (s, e) =>
+			{
+				if (e.NewTextValue.Length > 20)
+				{
+					ErrorLabel.IsVisible = true;
+				}
+				else
+				{
+					ErrorLabel.IsVisible = false;
+				}
+			};
 		}
 
 		void OnSaveClicked(object sender, EventArgs e)
@@ -28,9 +40,17 @@ namespace NavascaBasTaskerApp.MVVM.Views
 		{
 			var selectedColor = ColorCollectionView.SelectedItem as string ?? "#5E66FF";
 
-			if (!string.IsNullOrWhiteSpace(CategoryEntry.Text))
+			if (!string.IsNullOrWhiteSpace(CategoryEntry.Text) && CategoryEntry.Text.Length <= 20)
 			{
 				Close(new { Name = CategoryEntry.Text, Color = selectedColor });
+			}
+			else
+			{
+				ErrorLabel.IsVisible = true;
+				if (string.IsNullOrWhiteSpace(CategoryEntry.Text))
+				{
+					ErrorLabel.Text = "Category name cannot be empty.";
+				}
 			}
 		}
 

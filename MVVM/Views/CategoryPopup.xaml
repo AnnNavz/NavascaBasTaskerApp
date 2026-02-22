@@ -32,8 +32,16 @@
                        PlaceholderColor="Silver"
                        TextColor="Black"
                        BackgroundColor="#f3f0ff"
-                       FontFamily="OutfitRegular"/>
-                
+                       FontFamily="OutfitRegular"
+                       MaxLength="21" />
+                <Label x:Name="ErrorLabel"
+                       Text="Category name cannot exceed 20 characters."
+                       TextColor="Red"
+                       FontSize="12"
+                       FontFamily="OutfitRegular"
+                       Margin="5,-5,0,0"
+                       IsVisible="False" />
+
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="10">

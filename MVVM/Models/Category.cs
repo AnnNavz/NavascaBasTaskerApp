@@ -23,7 +23,6 @@ namespace NavascaBasTaskerApp.MVVM.Models
 
 		public void UpdateProgress(IEnumerable<MyTask> allTasks)
 		{
-			// Filter tasks belonging to this specific category
 			var categoryTasks = allTasks.Where(t => t.CategoryId == this.Id).ToList();
 
 			if (categoryTasks.Count == 0)
@@ -32,7 +31,6 @@ namespace NavascaBasTaskerApp.MVVM.Models
 				return;
 			}
 
-			// Calculate: (Completed Tasks / Total Tasks)
 			float completedCount = categoryTasks.Count(t => t.Completed);
 			Percentage = completedCount / categoryTasks.Count;
 		}

@@ -118,7 +118,7 @@
                                                                   CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid Padding="20,15,20,0">
+                                        <Grid ColumnDefinitions="6.5*,*" Padding="20,15,20,15">
                                             <Grid.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                                     <GradientStop Color="{Binding Color}" Offset="0.1" />
@@ -126,48 +126,53 @@
                                                 </LinearGradientBrush>
                                             </Grid.Background>
 
+                                            <Grid RowDefinitions="*, Auto">
 
-                                            <VerticalStackLayout Spacing="5">
+                                                <VerticalStackLayout Grid.Row="0" Spacing="5" VerticalOptions="Start">
+                                                    <Label Text="{Binding CategoryName}" 
+                                                           TextColor="White" 
+                                                           FontSize="24" 
+                                                           FontFamily="OutfitBold"
+                                                           Margin="0,5,0,0"/>
 
-                                                <Label Text="{Binding CategoryName}" 
-                                                       TextColor="White" 
-                                                       FontSize="24" 
-                                                       FontFamily="OutfitBold"
-                                                       Margin="0,5,0,0"/>
+                                                    <Label Text="{Binding PendingTasks, StringFormat='Pending: {0}'}" 
+                                                           TextColor="White" 
+                                                           FontSize="14"
+                                                           FontFamily="OutfitRegular"
+                                                            Opacity="0.9"/>
+                                                </VerticalStackLayout>
+                                            </Grid>
 
-                                                <Label Text="{Binding PendingTasks, StringFormat='Pending: {0}'}" 
-                                                       TextColor="White" 
-                                                       FontSize="14"
-                                                       FontFamily="OutfitRegular"
-                                                       Opacity="0.9"/>
-                                                
-                                                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" Margin="0,10,0,0">
-                                                    <ProgressBar Grid.Column="0"
+                                            <Grid Grid.ColumnSpan="2"
+                                                      ColumnDefinitions="*, Auto" 
+                                                      ColumnSpacing="10" 
+                                                      VerticalOptions="End" 
+                                                      Margin="0,0,0,5">
+
+                                                <ProgressBar Grid.Column="0"
                                                                  Progress="{Binding Percentage}" 
                                                                  ProgressColor="#ffaa20"
                                                                  HeightRequest="8"
+                                                                 BackgroundColor="#627282"
                                                                  VerticalOptions="Center" />
 
-                                                    <Label Grid.Column="1"
+                                                <Label Grid.Column="1"
                                                            Text="{Binding Percentage, StringFormat='{0:P0}'}"
                                                            TextColor="White"
                                                            FontSize="12"
                                                            FontFamily="OutfitSemibold"
                                                            VerticalOptions="Center" />
-                                                </Grid>
+                                            </Grid>
 
-
-                                            </VerticalStackLayout>
-
-                                            <ImageButton Source="edit.png" 
-                                                        HorizontalOptions="End" 
-                                                        VerticalOptions="Start"
-                                                        WidthRequest="25"
-                                                        HeightRequest="25"
-                                                        BackgroundColor="Transparent"
-                                                        Aspect="AspectFit"
-                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditCategoryCommand}"
-                                                        CommandParameter="{Binding .}"/>
+                                            <ImageButton Source="edit.png"
+                                                         Grid.Column="1"
+                                                         VerticalOptions="Start"
+                                                         WidthRequest="25"
+                                                         HeightRequest="25"
+                                                         BackgroundColor="Transparent"
+                                                         Aspect="AspectFit"
+                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditCategoryCommand}"
+                                                         CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -197,23 +202,23 @@
 
                                 <HorizontalStackLayout Margin="0,25,0,0">
                                     <Label Text="{Binding FilterHeader}"
-           Margin="25,0,0,0"
-           FontSize="18"
-           FontFamily="OutfitSemibold"
-           TextColor="#7b81ff" />
+                                           Margin="25,0,0,0"
+                                           FontSize="18"
+                                           FontFamily="OutfitSemibold"
+                                           TextColor="#7b81ff" />
 
                                     <Label Text="{Binding FilteredTasks.Count}"
-           Margin="8,2,0,0"
-           FontSize="15"
-           FontFamily="OutfitLight"
-           TextColor="#7b81ff" />
+                                           Margin="8,2,0,0"
+                                           FontSize="15"
+                                           FontFamily="OutfitLight"
+                                           TextColor="#7b81ff" />
 
                                 </HorizontalStackLayout>
 
                                 <ImageButton Source="filter.png"
                                              Grid.Column="1"
                                              WidthRequest="28"
-                                             Margin="0,1,0,0"
+                                             Margin="0,15,0,0"
                                              x:Name="filter"
                                              Command="{Binding ToggleStatusFilterCommand}"
                                              />
@@ -224,7 +229,7 @@
                                 <CollectionView ItemsSource="{Binding FilteredTasks}"
                                                 Grid.Row="1"
                                                 Grid.ColumnSpan="2"
-                                                Margin="0,15,0, 30">
+                                                Margin="0,0,0,30">
 
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />

@@ -5,7 +5,6 @@ namespace NavascaBasTaskerApp.MVVM.Views;
 
 public partial class TaskDetailPopup : Popup
 {
-	// Property to store the name so the XAML can see it
 	public bool IsEditMode { get; set; } = false;
 	public string DisplayCategoryName { get; set; }
 
