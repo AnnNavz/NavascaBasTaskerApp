@@ -70,12 +70,12 @@
                     
                     
                     <Button Text="DELETE" 
-            Clicked="OnDeleteClicked" 
-            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"
-            BackgroundColor="Transparent" 
-            TextColor="Red"
-            FontFamily="OutfitBold"
-            FontSize="14"/>
+                            Clicked="OnDeleteClicked" 
+                            IsVisible="{Binding IsEditMode, Source={RelativeSource AncestorType={x:Type local:TaskDetailPopup}}, Converter={toolkit:InvertedBoolConverter}}"
+                            BackgroundColor="Transparent" 
+                            TextColor="Red"
+                            FontFamily="OutfitBold"
+                            FontSize="14"/>
 
                     <Button Text="CANCEL" 
                             Clicked="OnCancelClicked" 
