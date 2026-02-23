@@ -7,38 +7,27 @@
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False"
              >
-    
+
     <VerticalStackLayout>
+
         <Label Text="Add New Task"
-               FontFamily="OutfitBold"
-               FontSize="32"
-               FontAttributes="Bold"
-               Margin="30,60,0,0"
-               TextColor="#5E66FF"/>
+               Style="{StaticResource TitleLabelStyle}"
+               Margin="30,60,0,0"/>
 
         <HorizontalStackLayout Margin="0,20,0,0">
 
-
             <Label Text="Select a Category"
-               FontFamily="OutfitSemibold"
-               FontSize="18"
-               Margin="30,10,0,0"
-               TextColor="Black"/>
+                   Style="{StaticResource SectionLabelStyle}"
+                   Margin="30,10,0,0"/>
 
-            <Button WidthRequest="120"
-                    HeightRequest="10"
-                    CornerRadius="12"
+            <Button Text="Add Category"
+                    WidthRequest="120"
+                    HeightRequest="40"
                     Margin="80,0,0,0"
                     BackgroundColor="#ffaa20"
-                    Text="Add Category"
+                    Style="{StaticResource PrimaryButtonStyle}"
                     FontSize="14"
-                    FontAttributes="Bold"
-                    FontFamily="OutfitBold"
-                    TextColor="White"
-                    Command="{Binding AddCategoryCommand}"
-                    />
-
-
+                    Command="{Binding AddCategoryCommand}"/>
 
         </HorizontalStackLayout>
 
@@ -49,20 +38,17 @@
                 Margin="0,15,0,0">
 
             <Picker x:Name="MyPicker"
+                    Style="{StaticResource PickerStyle}"
                     ItemsSource="{Binding Categories}"
                     ItemDisplayBinding="{Binding CategoryName}"
-                    SelectedItem="{Binding SelectedCategory}"
-                    WidthRequest="350"
-                    FontFamily="OutfitRegular"
-                    TextColor="Black"
-                    BackgroundColor="#f3f0ff"/>
+                    SelectedItem="{Binding SelectedCategory}" />
         </Border>
 
         <Border WidthRequest="350"
                 HeightRequest="290"
                 Stroke="#7B81FF"
-                Margin="0,40,0,0"
-                >
+                Margin="0,40,0,0">
+
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="15"/>
             </Border.StrokeShape>
@@ -70,49 +56,27 @@
             <VerticalStackLayout>
 
                 <Label Text="Task Name"
-                       FontFamily="OutfitSemibold"
-                       FontSize="16"
-                       Margin="20,18,0,10"
-                       TextColor="Black"/>
+                       Style="{StaticResource FieldLabelStyle}"
+                       Margin="20,18,0,10"/>
 
-                <Entry WidthRequest="310"
-                       HeightRequest="50"
-                       BackgroundColor="#F3F0FF"
-                       FontFamily="OutfitRegular"
-                       FontSize="14"
-                       TextColor="Black"
+                <Entry Style="{StaticResource EntryStyle}"
                        Text="{Binding TaskName}"/>
 
                 <Label Text="Description"
-                       FontFamily="OutfitSemibold"
-                       FontSize="16"
-                       Margin="20,25,0,10"
-                       TextColor="Black"/>
+                       Style="{StaticResource FieldLabelStyle}"
+                       Margin="20,25,0,10"/>
 
-                <Editor PlaceholderColor="Gray"
-                        Text="{Binding Description}"
-                        AutoSize="TextChanges"
-                        HeightRequest="100"
-                        VerticalOptions="Start" 
-                        WidthRequest="310"
-                        BackgroundColor="#F3F0FF"
-                        FontFamily="OutfitRegular"
-                        FontSize="14"
-                        TextColor="Black"/>
+                <Editor Style="{StaticResource EditorStyle}"
+                        Text="{Binding Description}"/>
 
             </VerticalStackLayout>
         </Border>
 
-        <Button WidthRequest="350"
+        <Button Text="Add Task"
+                WidthRequest="350"
                 HeightRequest="50"
-                CornerRadius="12"
                 Margin="0,50,0,0"
-                BackgroundColor="#C9CCFF"
-                Text="Add Task"
-                FontAttributes="Bold"
-                TextColor="#5E66FF"
-                FontFamily="OutfitBold"
-                FontSize="18"
+                Style="{StaticResource AddTaskButtonStyle}"
                 Command="{Binding AddTaskCommand}"/>
 
     </VerticalStackLayout>

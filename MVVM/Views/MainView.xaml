@@ -8,6 +8,7 @@
              Title="MainView"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#c9ccff">
+    
     <Grid>
 
         <ScrollView>

@@ -1,0 +1,9 @@
+namespace NavascaBasTaskerApp.Resources.Styles;
+
+public partial class AppStyle : ResourceDictionary
+{
+	public AppStyle()
+	{
+		InitializeComponent();
+	}
+}
