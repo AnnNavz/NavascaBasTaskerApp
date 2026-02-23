@@ -1,18 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NavascaBasTaskerApp.Resources.Styles.AppStyle">
+             x:Class="NavascaBasTaskerApp.Resources.Styles.AppStyle"
+             xmlns:viewmodels="clr-namespace:NavascaBasTaskerApp.MVVM.ViewModels">
 
     <!-- MainView -->
     
+    <DataTemplate x:Key="CategoryItemTemplate">
+        <Border WidthRequest="220" HeightRequest="150" StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="25"/>
+            </Border.StrokeShape>
+            <Border.Shadow>
+                <Shadow Brush="#212A40" Offset="1,5" Radius="3" Opacity="0.6"/>
+            </Border.Shadow>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=FilterTasksCommand}"
+                                              CommandParameter="{Binding .}" />
+            </Border.GestureRecognizers>
+            <Grid ColumnDefinitions="6.5*,*" Padding="20,15,20,15">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="{Binding Color}" Offset="0.1" />
+                        <GradientStop Color="#4b51cc" Offset="2.0" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid RowDefinitions="*, Auto">
+                    <VerticalStackLayout Grid.Row="0" Spacing="5" VerticalOptions="Start">
+                        <Label Text="{Binding CategoryName}" TextColor="White" FontSize="24" FontFamily="OutfitBold" Margin="0,5,0,0"/>
+                        <Label Text="{Binding PendingTasks, StringFormat='Pending: {0}'}" TextColor="White" FontSize="14" FontFamily="OutfitRegular" Opacity="0.9"/>
+                    </VerticalStackLayout>
+                </Grid>
+                <Grid Grid.ColumnSpan="2" ColumnDefinitions="*, Auto" ColumnSpacing="10" VerticalOptions="End" Margin="0,0,0,5">
+                    <ProgressBar Grid.Column="0" Progress="{Binding Percentage}" ProgressColor="#ffaa20" HeightRequest="8" BackgroundColor="#627282" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Text="{Binding Percentage, StringFormat='{0:P0}'}" TextColor="White" FontSize="12" FontFamily="OutfitSemibold" VerticalOptions="Center" />
+                </Grid>
+                <ImageButton Source="edit.png" Grid.Column="1" VerticalOptions="Start" WidthRequest="25" HeightRequest="25" BackgroundColor="Transparent" Aspect="AspectFit"
+                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditCategoryCommand}"
+                                     CommandParameter="{Binding .}"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
 
-
+    <DataTemplate x:Key="TaskItemTemplate">
+        <Border StrokeThickness="0" BackgroundColor="White" Margin="0,0,0,12" HeightRequest="60" WidthRequest="310">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <Border.Shadow>
+                <Shadow Brush="Black" Opacity="0.3" Offset="0,2" Radius="4"/>
+            </Border.Shadow>
+            <Grid ColumnDefinitions="50, *">
+                <Border Grid.Column="0" BackgroundColor="{Binding TaskColor}" StrokeThickness="0" WidthRequest="50">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,0,20,0"/>
+                    </Border.StrokeShape>
+                    <CheckBox Color="White" Margin="11,0,0,0" Scale="1.3" IsChecked="{Binding Completed}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="IsChecked">
+                                        <VisualState.Setters>
+                                            <Setter Property="Color" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Color" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </CheckBox>
+                </Border>
+                <Border Grid.Column="1" Stroke="White">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=EditTaskCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="*, Auto" Padding="15,0,15,0" VerticalOptions="Center">
+                        <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                            <Label Text="{Binding TaskName}" TextColor="Black" FontFamily="OutfitSemibold" FontSize="16" LineBreakMode="TailTruncation" MaxLines="1" />
+                            <Label Text="Pending" TextColor="Gray" FontSize="14" FontFamily="OutfitRegular">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Completed}" Value="True">
+                                        <Setter Property="Text" Value="Done" />
+                                        <Setter Property="TextColor" Value="#ffaa20" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </DataTemplate>
+    
     <!-- MainView -->
 
 
     <!-- AddTaskView -->
     
-    <!-- Title Label -->
     <Style x:Key="TitleLabelStyle" TargetType="Label">
         <Setter Property="FontFamily" Value="OutfitBold"/>
         <Setter Property="FontSize" Value="32"/>
@@ -20,21 +108,18 @@
         <Setter Property="TextColor" Value="#5E66FF"/>
     </Style>
 
-    <!-- Section Label -->
     <Style x:Key="SectionLabelStyle" TargetType="Label">
         <Setter Property="FontFamily" Value="OutfitSemibold"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="TextColor" Value="Black"/>
     </Style>
 
-    <!-- Field Label -->
     <Style x:Key="FieldLabelStyle" TargetType="Label">
         <Setter Property="FontFamily" Value="OutfitSemibold"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="TextColor" Value="Black"/>
     </Style>
 
-    <!-- Primary Button -->
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
         <Setter Property="FontFamily" Value="OutfitBold"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -42,7 +127,6 @@
         <Setter Property="CornerRadius" Value="12"/>
     </Style>
 
-    <!-- Add Task Button -->
     <Style x:Key="AddTaskButtonStyle" TargetType="Button">
         <Setter Property="FontFamily" Value="OutfitBold"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -52,7 +136,6 @@
         <Setter Property="TextColor" Value="#5E66FF"/>
     </Style>
 
-    <!-- Entry Style -->
     <Style x:Key="EntryStyle" TargetType="Entry">
         <Setter Property="BackgroundColor" Value="#F3F0FF"/>
         <Setter Property="FontFamily" Value="OutfitRegular"/>
@@ -62,7 +145,6 @@
         <Setter Property="WidthRequest" Value="310"/>
     </Style>
 
-    <!-- Editor Style -->
     <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="BackgroundColor" Value="#F3F0FF"/>
         <Setter Property="FontFamily" Value="OutfitRegular"/>
@@ -73,7 +155,6 @@
         <Setter Property="AutoSize" Value="TextChanges"/>
     </Style>
 
-    <!-- Picker Style -->
     <Style x:Key="PickerStyle" TargetType="Picker">
         <Setter Property="FontFamily" Value="OutfitRegular"/>
         <Setter Property="TextColor" Value="Black"/>
