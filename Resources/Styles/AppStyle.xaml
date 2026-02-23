@@ -5,7 +5,64 @@
              xmlns:viewmodels="clr-namespace:NavascaBasTaskerApp.MVVM.ViewModels">
 
     <!-- MainView -->
-    
+
+    <Style x:Key="WelcomeLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Margin" Value="0,30,0,0" />
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+    </Style>
+
+    <Style x:Key="UserNameLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="OutfitSemibold" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+    </Style>
+
+    <Style x:Key="MyTasksHeaderStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="Margin" Value="10,30,0,0" />
+        <Setter Property="TextColor" Value="#5E66FF" />
+    </Style>
+
+    <Style x:Key="CategoriesLabelStyle" TargetType="Label">
+        <Setter Property="Margin" Value="30,15,0,0" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+        <Setter Property="TextColor" Value="#7b81ff" />
+    </Style>
+
+    <Style x:Key="EmptyViewHeaderStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="Gray" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="OutfitMedium" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="EmptyViewInstructionStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="Silver" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="FilterHeaderLabelStyle" TargetType="Label">
+        <Setter Property="Margin" Value="25,0,0,0" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="OutfitSemibold" />
+        <Setter Property="TextColor" Value="#7b81ff" />
+    </Style>
+
+    <Style x:Key="TaskCountLabelStyle" TargetType="Label">
+        <Setter Property="Margin" Value="8,2,0,0" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontFamily" Value="OutfitLight" />
+        <Setter Property="TextColor" Value="#7b81ff" />
+    </Style>
+
     <DataTemplate x:Key="CategoryItemTemplate">
         <Border WidthRequest="220" HeightRequest="150" StrokeThickness="0">
             <Border.StrokeShape>
@@ -95,7 +152,30 @@
             </Grid>
         </Border>
     </DataTemplate>
-    
+
+    <Style x:Key="BtnCategoryStyle" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="75" />
+        <Setter Property="Scale" Value="0" />
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="30" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style x:Key="BtnTaskStyle" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="75" />
+        <Setter Property="Scale" Value="0" />
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="30" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style x:Key="MainFabStyle" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="85" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
     <!-- MainView -->
 
 
@@ -163,5 +243,150 @@
     </Style>
 
     <!-- AddTaskView -->
+
+    <!-- ManageCategoryPopup -->
+
+    <Style x:Key="CategoryOptionsLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="#5E66FF" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style x:Key="EditNameButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#f3f0ff" />
+        <Setter Property="TextColor" Value="#5E66FF" />
+        <Setter Property="FontFamily" Value="OutfitSemibold" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style x:Key="DeleteButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#ffebee" />
+        <Setter Property="TextColor" Value="Red" />
+        <Setter Property="FontFamily" Value="OutfitSemibold" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <!-- ManageCategoryPopup -->
+
+    <!-- TaskDetailPopup -->
+
+
+    <Style x:Key="DisplayCategoryNameLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="0,10,0,20" />
+    </Style>
+
+    <Style x:Key="FieldHeaderLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="Gray" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+    </Style>
+
+    <Style x:Key="TaskNameDisplayStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="TextColor" Value="Black" />
+    </Style>
+
+    <Style x:Key="TaskNameEntryStyle" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="#F3F0FF" />
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="Black" />
+    </Style>
+
+    <Style x:Key="DescriptionDisplayStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+    </Style>
+
+    <Style x:Key="DescriptionEditorStyle" TargetType="Editor">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="HeightRequest" Value="150" />
+        <Setter Property="BackgroundColor" Value="#F3F0FF" />
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+
+    <Style x:Key="ActionButtonBase" TargetType="Button">
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="EditSaveBtnStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonBase}">
+        <Setter Property="Text" Value="EDIT" />
+        <Setter Property="WidthRequest" Value="100" />
+        <Setter Property="BackgroundColor" Value="#5E66FF" />
+        <Setter Property="TextColor" Value="White" />
+    </Style>
+
+    <Style x:Key="DeleteBtnStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonBase}">
+        <Setter Property="Text" Value="DELETE" />
+        <Setter Property="TextColor" Value="Red" />
+    </Style>
+
+    <Style x:Key="CancelBtnStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonBase}">
+        <Setter Property="Text" Value="CANCEL" />
+        <Setter Property="TextColor" Value="Gray" />
+    </Style>
+
+    <!-- TaskDetailPopup -->
+
+    <!-- CategoryPopup -->
+
+    <Style x:Key="BaseLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+    </Style>
+
+    <Style x:Key="HeaderLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="TextColor" Value="#5E66FF" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="FieldHatdogLabelStyle" TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="Gray" />
+        <Setter Property="Margin" Value="5,0" />
+    </Style>
+
+    <Style x:Key="CategoryEntryStyle" TargetType="Entry">
+        <Setter Property="PlaceholderColor" Value="Silver" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BackgroundColor" Value="#f3f0ff" />
+        <Setter Property="FontFamily" Value="OutfitRegular" />
+        <Setter Property="MaxLength" Value="21" />
+    </Style>
+
+    <Style x:Key="ErrorLabelStyle" TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}">
+        <Setter Property="TextColor" Value="Red" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="5,-5,0,0" />
+    </Style>
+
+    <Style x:Key="CreateButtonStyle" TargetType="Button">
+        <Setter Property="Text" Value="CREATE" />
+        <Setter Property="FontFamily" Value="OutfitBold" />
+        <Setter Property="BackgroundColor" Value="#5E66FF" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Margin" Value="0,10,0,0" />
+    </Style>
+
+    <!-- CategoryPopup -->
+
+
 
 </ResourceDictionary>

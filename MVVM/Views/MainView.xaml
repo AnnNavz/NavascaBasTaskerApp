@@ -8,7 +8,8 @@
              Title="MainView"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#c9ccff">
-
+    
+    
     <Grid>
         <ScrollView>
             <VerticalStackLayout>
@@ -21,8 +22,8 @@
                     </Border.Shadow>
                     <Grid RowDefinitions="*,*" ColumnDefinitions="Auto, 3*, *">
                         <Image Grid.RowSpan="2" Source="menu.png" WidthRequest="25" Margin="30,0,0,0"/>
-                        <Label Text="Welcome," Grid.Column="1" FontFamily="OutfitRegular" TextColor="White" FontSize="15" Margin="0,30,0,0" HorizontalTextAlignment="End"/>
-                        <Label Text="Marven James Bas" Grid.Column="1" Grid.Row="1" FontFamily="OutfitSemibold" TextColor="White" FontSize="18" HorizontalTextAlignment="End"/>
+                        <Label Text="Welcome," Grid.Column="1" Style="{StaticResource WelcomeLabelStyle}" />
+                        <Label Text="Marven James Bas" Grid.Column="1" Grid.Row="1" Style="{StaticResource UserNameLabelStyle}" />
                         <Image Grid.Column="2" Grid.RowSpan="2" Source="user.png" WidthRequest="60"/>
                     </Grid>
                 </Border>
@@ -38,10 +39,10 @@
                     <Grid RowDefinitions="Auto, Auto, Auto, Auto">
                         <HorizontalStackLayout>
                             <Image Source="checklist.png" WidthRequest="40" Margin="30,30,0,0" HorizontalOptions="Start"/>
-                            <Label Text="My Tasks" FontSize="28" FontFamily="OutfitBold" Margin="10,30,0,0" TextColor="#5E66FF"/>
+                            <Label Text="My Tasks" Style="{StaticResource MyTasksHeaderStyle}" />
                         </HorizontalStackLayout>
 
-                        <Label Text="Categories" Grid.Row="1" Margin="30,15,0,0" FontSize="18" FontFamily="OutfitRegular" TextColor="#7b81ff"/>
+                        <Label Text="Categories" Grid.Row="1" Style="{StaticResource CategoriesLabelStyle}" />
 
                         <CollectionView Grid.Row="2"
                                         ItemsSource="{Binding Categories}"
@@ -50,8 +51,8 @@
                                         ItemTemplate="{StaticResource CategoryItemTemplate}">
                             <CollectionView.EmptyView>
                                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Label Text="No Categories found!" TextColor="Gray" FontSize="18" FontFamily="OutfitMedium" HorizontalOptions="Center"/>
-                                    <Label Text="Tap the '+' button to add a new category." TextColor="Silver" FontSize="14" FontFamily="OutfitRegular" HorizontalOptions="Center" />
+                                    <Label Text="No Categories found!" Style="{StaticResource EmptyViewHeaderStyle}" />
+                                    <Label Text="Tap the '+' button to add a new category." Style="{StaticResource EmptyViewInstructionStyle}" />
                                 </VerticalStackLayout>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemsLayout>
@@ -69,8 +70,8 @@
 
                             <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="10*, 3*">
                                 <HorizontalStackLayout Margin="0,25,0,0">
-                                    <Label Text="{Binding FilterHeader}" Margin="25,0,0,0" FontSize="18" FontFamily="OutfitSemibold" TextColor="#7b81ff" />
-                                    <Label Text="{Binding FilteredTasks.Count}" Margin="8,2,0,0" FontSize="15" FontFamily="OutfitLight" TextColor="#7b81ff" />
+                                    <Label Text="{Binding FilterHeader}" Style="{StaticResource FilterHeaderLabelStyle}" />
+                                    <Label Text="{Binding FilteredTasks.Count}" Style="{StaticResource TaskCountLabelStyle}" />
                                 </HorizontalStackLayout>
 
                                 <ImageButton Source="filter.png" Grid.Column="1" WidthRequest="28" Margin="0,15,0,0" Command="{Binding ToggleStatusFilterCommand}"/>
@@ -83,8 +84,8 @@
                                     <CollectionView.EmptyView>
                                         <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="0,35,0,0">
                                             <Image Source="empty_tasks.png" HorizontalOptions="Center" WidthRequest="80" Opacity="0.6"/>
-                                            <Label Text="No tasks found!" TextColor="Gray" FontSize="18" FontFamily="OutfitMedium" HorizontalOptions="Center" Margin="0,10,0,0"/>
-                                            <Label Text="Tap the '+' button to add a new task." TextColor="Silver" FontSize="14" FontFamily="OutfitRegular" HorizontalOptions="Center" />
+                                            <Label Text="No tasks found!" Style="{StaticResource EmptyViewHeaderStyle}" Margin="0,10,0,0"/>
+                                            <Label Text="Tap the '+' button to add a new task." Style="{StaticResource EmptyViewInstructionStyle}" />
                                         </VerticalStackLayout>
                                     </CollectionView.EmptyView>
                                     <CollectionView.ItemsLayout>
@@ -99,9 +100,24 @@
         </ScrollView>
 
         <Grid VerticalOptions="End" HorizontalOptions="End" Margin="25" RowDefinitions="*, *, *">
-            <ImageButton x:Name="btnCategory" Grid.Row="0" Source="add_category.png" WidthRequest="75" Scale="0" Opacity="0" BackgroundColor="Transparent" CornerRadius="30" Margin="0,0,0,10" Command="{Binding AddCategoryCommand}"/>
-            <ImageButton x:Name="btnTask" Grid.Row="1" Source="add_tasks.png" WidthRequest="75" Scale="0" Opacity="0" Clicked="AddTask_Clicked" BackgroundColor="Transparent" CornerRadius="30" Margin="0,0,0,10" />
-            <ImageButton x:Name="MainFab" Grid.Row="2" Source="plus.png" WidthRequest="85" BackgroundColor="Transparent" Clicked="OnMainFabClicked" />
+            
+            <ImageButton x:Name="btnCategory" 
+                 Grid.Row="0" 
+                 Source="add_category.png" 
+                 Style="{StaticResource BtnCategoryStyle}"
+                 Command="{Binding AddCategoryCommand}"/>
+
+            <ImageButton x:Name="btnTask" 
+                 Grid.Row="1" 
+                 Source="add_tasks.png" 
+                 Style="{StaticResource BtnTaskStyle}"
+                 Clicked="AddTask_Clicked" />
+
+            <ImageButton x:Name="MainFab" 
+                 Grid.Row="2" 
+                 Source="plus.png" 
+                 Style="{StaticResource MainFabStyle}"
+                 Clicked="OnMainFabClicked" />
         </Grid>
     </Grid>
 

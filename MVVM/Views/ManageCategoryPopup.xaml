@@ -15,21 +15,20 @@
         </Border.StrokeShape>
 
         <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
-            <Label Text="Category Options" FontSize="24" FontFamily="OutfitBold" 
-                   HorizontalOptions="Center" TextColor="#5E66FF"
-                   Margin="0,0,0,10"/>
+            
+            <Label Text="Category Options" 
+           Style="{StaticResource CategoryOptionsLabelStyle}"/>
 
-            <Button Text="EDIT NAME" ImageSource="edit_icon.png"
-                    BackgroundColor="#f3f0ff" TextColor="#5E66FF"
-                    FontFamily="OutfitSemibold" HeightRequest="50"
-                    Clicked="OnEditClicked"
-                    FontSize="16"/>
+            <Button Text="EDIT NAME" 
+            ImageSource="edit_icon.png" 
+            Style="{StaticResource EditNameButtonStyle}"
+            Clicked="OnEditClicked"/>
 
-            <Button Text="DELETE" ImageSource="delete_icon.png"
-                    BackgroundColor="#ffebee" TextColor="Red"
-                    FontFamily="OutfitSemibold" HeightRequest="50"
-                    FontSize="16"
-                    Clicked="OnDeleteClicked"/>
+            <Button Text="DELETE" 
+            ImageSource="delete_icon.png" 
+            Style="{StaticResource DeleteButtonStyle}"
+            Clicked="OnDeleteClicked"/>
+            
         </VerticalStackLayout>
     </Border>
 </toolkit:Popup>

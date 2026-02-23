@@ -20,32 +20,25 @@
         <VerticalStackLayout Padding="25" Spacing="20" VerticalOptions="Center">
 
             <Label Text="New Category" 
-                   FontSize="24" 
-                   FontFamily="OutfitBold"
-                   TextColor="#5E66FF" 
-                   HorizontalOptions="Center"/>
+                   Style="{StaticResource HeaderLabelStyle}" />
 
             <VerticalStackLayout Spacing="8">
-                <Label Text="Name" FontSize="16" TextColor="Gray" FontFamily="OutfitRegular" Margin="5,0"/>
+                <Label Text="Name" 
+                       Style="{StaticResource FieldHatdogLabelStyle}" />
 
                 <Entry x:Name="CategoryEntry" 
-                       PlaceholderColor="Silver"
-                       TextColor="Black"
-                       BackgroundColor="#f3f0ff"
-                       FontFamily="OutfitRegular"
-                       MaxLength="21" />
-                <Label x:Name="ErrorLabel"
+                       Style="{StaticResource CategoryEntryStyle}" />
+
+                <Label x:Name="ErrorLabel" 
                        Text="Category name cannot exceed 20 characters."
-                       TextColor="Red"
-                       FontSize="12"
-                       FontFamily="OutfitRegular"
-                       Margin="5,-5,0,0"
+                       Style="{StaticResource ErrorLabelStyle}"
                        IsVisible="False" />
 
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="10">
-                <Label Text="Choose Theme Color" FontSize="16" FontFamily="OutfitRegular" TextColor="Gray" Margin="5,0"/>
+                <Label Text="Choose Theme Color" 
+                       Style="{StaticResource FieldHatdogLabelStyle}" />
 
                 <CollectionView x:Name="ColorCollectionView" 
                 SelectionMode="Single"
@@ -69,15 +62,8 @@
 </CollectionView>
             </VerticalStackLayout>
 
-            <Button Text="CREATE"
-                    FontFamily="OutfitBold"
-                    Clicked="OnAdd_Clicked" 
-                    BackgroundColor="#5E66FF" 
-                    TextColor="White" 
-                    CornerRadius="15"
-                    FontSize="16"
-                    HeightRequest="50"
-                    Margin="0,10,0,0"/>
+            <Button Style="{StaticResource CreateButtonStyle}"
+                    Clicked="OnAdd_Clicked" />
 
         </VerticalStackLayout>
     </Border>
